@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="file:///C:/Users/hsez/AppData/Local/luogu-md2pdf/katex-0.16.11/package/dist/katex.min.css">
+<script defer src="file:///C:/Users/hsez/AppData/Local/luogu-md2pdf/katex-0.16.11/package/dist/katex.min.js"></script>
+<script defer src="file:///C:/Users/hsez/AppData/Local/luogu-md2pdf/katex-0.16.11/package/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{
+  delimiters: [
+    {left: '$$', right: '$$', display: true},
+    {left: '$', right: '$', display: false}
+  ],
+  throwOnError: false,
+  strict: false
+});"></script>
+<style>
+@page { size: A4; margin: 20mm 18mm; }
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: -apple-system, "Segoe UI", "Microsoft YaHei", "PingFang SC",
+               "Noto Sans CJK SC", "Helvetica Neue", Arial, sans-serif;
+  font-size: 11pt;
+  line-height: 1.7;
+  color: #1f2328;
+}
+h1, h2, h3, h4, h5, h6 {
+  color: #111; line-height: 1.35; margin: 1.15em 0 0.55em; font-weight: 600;
+}
+h1 { font-size: 1.65em; border-bottom: 2px solid #eaecef; padding-bottom: 0.25em; }
+h2 { font-size: 1.4em; border-bottom: 1px solid #eaecef; padding-bottom: 0.2em; }
+h3 { font-size: 1.2em; }
+h4 { font-size: 1.05em; }
+h5 { font-size: 1em; }
+h6 { font-size: 0.92em; color: #555; }
+p { margin: 0.6em 0; }
+a { color: #0b66c3; text-decoration: none; }
+code {
+  font-family: Consolas, "SF Mono", Menlo, "Courier New", monospace;
+  background: rgba(27,31,35,0.07); padding: 0.1em 0.35em;
+  border-radius: 3px; font-size: 0.9em;
+}
+pre { margin: 0.85em 0; page-break-inside: avoid; }
+pre.code-block {
+  background: #f6f8fa; border: 1px solid #e1e4e8; border-radius: 6px;
+  padding: 10px 14px; overflow-x: hidden;
+}
+pre.code-block code {
+  background: transparent; padding: 0; font-size: 0.85em; line-height: 1.5;
+  color: #24292f; white-space: normal;
+}
+pre.code-block .cl { display: block; white-space: pre; }
+pre.code-block .ln {
+  display: inline-block; min-width: 2.2em; margin-right: 0.9em;
+  text-align: right; color: #9aa0a6; user-select: none;
+}
+pre.code-block .cl.hl { background: #fff3cd; }
+blockquote {
+  margin: 0.85em 0; padding: 0.4em 1em; border-left: 4px solid #d0d7de;
+  color: #57606a; background: #f6f8fa;
+}
+blockquote p { margin: 0.3em 0; }
+hr { border: none; border-top: 1px solid #d0d7de; margin: 1.4em 0; }
+ul, ol { margin: 0.6em 0; padding-left: 1.6em; }
+li { margin: 0.25em 0; }
+li > ul, li > ol { margin: 0.2em 0; }
+/* 任务列表：复选框与文本同行；复选框与中文基线对齐。 */
+ul.contains-task-list { list-style: none; padding-left: 1.2em; }
+li.task-list-item { list-style: none; }
+li.task-list-item > p:first-child { margin: 0.25em 0; }
+li.task-list-item input[type="checkbox"] {
+  vertical-align: middle;
+  margin: 0 0.4em 0 0;
+  width: 0.95em;
+  height: 0.95em;
+  accent-color: #0969da;
+}
+table.markdown-table {
+  border-collapse: collapse; margin: 0.9em 0; width: 100%; font-size: 0.95em;
+}
+table.markdown-table th, table.markdown-table td {
+  border: 1px solid #d0d7de; padding: 6px 10px;
+}
+table.markdown-table th { background: #f6f8fa; font-weight: 600; }
+table.markdown-table tr { page-break-inside: avoid; }
+table.markdown-table tbody tr:nth-child(even) td { background: #fafbfc; }
+/* ::cute-table 标记：仿 Tuack 的表格（内部竖线 + 横线，表头分隔线与上下边线加粗，无底色，
+   且不画左右外框 —— 与洛谷网页渲染一致）。 */
+table.cute-table {
+  border-collapse: collapse; width: 100%; margin: 1em 0; font-size: 0.95em;
+  border-top: 3px solid #000; border-bottom: 3px solid #000;
+}
+table.cute-table th, table.cute-table td {
+  border: none; border-bottom: 1px solid #000; border-left: 1px solid #000;
+  padding: 6px 12px; background: transparent;
+}
+table.cute-table th:first-child, table.cute-table td:first-child { border-left: none; }
+table.cute-table th { background: transparent; font-weight: normal; }
+table.cute-table thead th { border-bottom: 2px solid #000; }
+table.cute-table tbody tr:nth-child(even) td { background: transparent; }
+/* 行间公式：容器允许横向滚动（屏幕端兜底）；长公式由 body 底部脚本自动缩放适配，
+   保证打印成 PDF 时不裁切、不撑破页面。整体避免跨页截断。 */
+.math-display {
+  margin: 1em 0;
+  text-align: center;
+  overflow-x: auto;
+  overflow-y: hidden;
+  page-break-inside: avoid;
+}
+.math-display > .katex-display { margin: 0; }
+img { max-width: 100%; }
+.callout {
+  border: 1px solid; border-radius: 6px; margin: 0.9em 0; page-break-inside: avoid;
+}
+.callout-title {
+  font-weight: 600; padding: 7px 12px; border-bottom: 1px solid rgba(0,0,0,0.07);
+  text-align: left;
+}
+.callout-body { padding: 8px 12px; }
+/* 折叠框标题里的公式（含 $$...$$ 的 display 模式）一律按行内处理并居左，
+   避免 KaTeX 默认的 block + 居中把标题撑成两行。 */
+.callout-title .katex-display {
+  display: inline-block;
+  margin: 0;
+  text-align: left;
+}
+.callout-title .katex-display > .katex {
+  display: inline-block;
+  text-align: left;
+  white-space: nowrap;
+}
+.callout-info { border-color: #b6d4fe; background: #f0f7ff; }
+.callout-info .callout-title { color: #0b5cab; }
+.callout-success { border-color: #b7e1b8; background: #f2fbf2; }
+.callout-success .callout-title { color: #1a7f37; }
+.callout-warning { border-color: #ffe0a3; background: #fffaf0; }
+.callout-warning .callout-title { color: #9a6700; }
+.callout-error { border-color: #f5b7b1; background: #fff5f4; }
+.callout-error .callout-title { color: #c0392b; }
+.epigraph { border-left: 4px solid #9a6700; background: #fffaf0; }
+.epigraph-attr {
+  text-align: right; font-style: italic; color: #6a737d; margin-top: 0.4em;
+}
+.task-check { margin-right: 0.3em; }
+del { color: #6a737d; }
+</style>
+</head>
+<body>
+<h2>我是一个标题</h2>
+<p><del>这是一个删除线</del></p>
+<p><em>这是斜体</em></p>
+<p><strong>这是粗体</strong></p>
+<blockquote>
+<p>这是引用</p>
+<blockquote>
+<p>这是多级引用</p>
+</blockquote>
+</blockquote>
+<p>* &lt;- 这是被转义的星号</p>
+<pre class="code-block line-numbers"><code class="language-cpp"><span class="cl"><span class="ln">1</span>#include&lt;bits/stdc++.h&gt;</span><span class="cl"><span class="ln">2</span>using namespace std;</span><span class="cl"><span class="ln">3</span>typedef long long LL;</span><span class="cl"><span class="ln">4</span>//十年OI一场空，不开long long见祖宗</span><span class="cl"><span class="ln">5</span>int main(){</span><span class="cl hl"><span class="ln">6</span>    //freopen(".in" , "r" , stdin);</span><span class="cl hl"><span class="ln">7</span>    //freopen(".out" , "w" , stdout);</span><span class="cl"><span class="ln">8</span>    int a , b;</span><span class="cl"><span class="ln">9</span>    scanf("%d%d" , &amp;a , &amp;b);</span><span class="cl"><span class="ln">10</span>    printf("%d" , a + b);</span><span class="cl"><span class="ln">11</span>    return 0;</span><span class="cl"><span class="ln">12</span>}</span></code></pre>
+<p>这是洛谷特色的代码框。</p>
+<ul>
+<li><p>这是无序列表</p></li>
+<li><p>这是无序列表</p>
+<ul>
+<li><p>这是嵌套的无序列表</p></li>
+<li><p>这是嵌套的无序列表</p></li>
+</ul></li>
+</ul>
+<ol>
+<li><p>这是有序列表</p></li>
+<li><p>这是有序列表</p></li>
+<li><p>这是有序列表</p></li>
+</ol>
+<ul class="contains-task-list">
+<li class="task-list-item"><p><input type="checkbox" class="task-list-item-checkbox" checked disabled> 这是任务列表</p></li>
+<li class="task-list-item"><p><input type="checkbox" class="task-list-item-checkbox" disabled> 这是任务列表</p></li>
+<li class="task-list-item"><p><input type="checkbox" class="task-list-item-checkbox" disabled> 这是任务列表</p></li>
+</ul>
+<p>这是一个<a href="https://www.luogu.com.cn">链接</a>。</p>
+<p>这是一个图片：</p>
+<p><img src="https://cdn.luogu.com.cn/upload/usericon/1523280.png" alt=""></p>
+<p>这是一些表格：</p>
+<table class="markdown-table"><thead><tr><th>我是左对齐</th><th style="text-align:center">我是居中对齐</th><th style="text-align:right">我是右侧对齐</th></tr></thead><tbody><tr><td>内容</td><td style="text-align:center">内容</td><td style="text-align:right">内容</td></tr></tbody></table>
+<table class="markdown-table"><thead><tr><th style="text-align:center">标题 1</th><th style="text-align:center">标题 2</th><th style="text-align:center">标题 3</th><th style="text-align:center">标题 4</th></tr></thead><tbody><tr><td style="text-align:center">1</td><td rowspan="3" style="text-align:center">$\le 10$</td><td rowspan="5" style="text-align:center">$\le 10$</td><td style="text-align:center">无</td></tr><tr><td style="text-align:center">2</td><td style="text-align:center">无</td></tr><tr><td style="text-align:center">3</td><td style="text-align:center">无</td></tr><tr><td style="text-align:center">4</td><td rowspan="6" style="text-align:center">$\le 3\times 10^5$</td><td style="text-align:center">无</td></tr><tr><td style="text-align:center">5</td><td style="text-align:center">无</td></tr><tr><td style="text-align:center">6</td><td rowspan="3" style="text-align:center">$\le 3\times 10^5$</td><td style="text-align:center">无</td></tr><tr><td style="text-align:center">7</td><td style="text-align:center">无</td></tr><tr><td style="text-align:center">8</td><td style="text-align:center">无</td></tr><tr><td style="text-align:center">9</td><td colspan="2" style="text-align:center">跨列合并 1</td></tr><tr><td style="text-align:center">10</td><td colspan="2" style="text-align:center">跨列合并 2</td><td style="text-align:center">无</td></tr></tbody></table>
+<table class="markdown-table cute-table"><thead><tr><th style="text-align:center">测试点编号</th><th style="text-align:center">$n, m \leq$</th><th style="text-align:center">$k \leq$</th><th style="text-align:center">特殊性质</th></tr></thead><tbody><tr><td style="text-align:center">$1, 2$</td><td style="text-align:center">$6$</td><td style="text-align:center">$6$</td><td rowspan="2" style="text-align:center">C</td></tr><tr><td style="text-align:center">$3 \sim 5$</td><td style="text-align:center">$10^3$</td><td style="text-align:center">$10^3$</td></tr><tr><td style="text-align:center">$6 \sim 8$</td><td style="text-align:center">$5 \times 10^4$</td><td style="text-align:center">$10^2$</td><td style="text-align:center">无</td></tr><tr><td style="text-align:center">$9, 10$</td><td rowspan="4" style="text-align:center">$10^5$</td><td rowspan="4" style="text-align:center">$10^5$</td><td style="text-align:center">AB</td></tr><tr><td style="text-align:center">$11, 12$</td><td style="text-align:center">A</td></tr><tr><td style="text-align:center">$13 \sim 15$</td><td style="text-align:center">C</td></tr><tr><td style="text-align:center">$16 \sim 18$</td><td rowspan="2" style="text-align:center">无</td></tr><tr><td style="text-align:center">$19, 20$</td><td style="text-align:center">$3 \times 10^5$</td><td style="text-align:center">$2.5 \times 10^5$</td></tr></tbody></table>
+<div style="text-align:center">
+<p><img src="https://cdn.luogu.com.cn/upload/usericon/1523280.png" alt=""></p>
+<p>这是居中排版</p>
+</div>
+<div style="text-align:right">
+<p><img src="https://cdn.luogu.com.cn/upload/usericon/1523280.png" alt=""></p>
+<p>这是居右排版</p>
+</div>
+<blockquote class="epigraph">
+<p>这是一个引言。</p>
+<div class="epigraph-attr">——a_small_OIer</div>
+</blockquote>
+<p>这是一些折叠框：</p>
+<div class="callout callout-info">
+<div class="callout-title">我是标题</div>
+<div class="callout-body"><p>大家好啊，我是说的道理，今天来点大家想看的东西。</p></div>
+</div>
+<div class="callout callout-info">
+<div class="callout-title">我是默认展开的折叠框</div>
+<div class="callout-body"><p>使用 <code>{open}</code> 使折叠框默认展开。</p></div>
+</div>
+<div class="callout callout-success">
+<div class="callout-title">$$\displaystyle\sum_{i = 1}^n \sum_{j = 1}^n \gcd(i, j)$$</div>
+<div class="callout-body"><p>数学公式也是可以出现在标题上的。</p></div>
+</div>
+<div class="callout callout-warning">
+<div class="callout-title">警告</div>
+<div class="callout-body"><p>这是一个警告框。</p></div>
+</div>
+<div class="callout callout-error">
+<div class="callout-title">错误</div>
+<div class="callout-body"><p>这是一个错误框。</p></div>
+</div>
+<div class="callout callout-warning">
+<div class="callout-title">我是警告</div>
+<div class="callout-body"><div class="callout callout-warning">
+<div class="callout-title">不要</div>
+<div class="callout-body"><div class="callout callout-warning">
+<div class="callout-title">滥用</div>
+<div class="callout-body"><div class="callout callout-warning">
+<div class="callout-title">嵌套</div>
+<div class="callout-body"><p>这是嵌套折叠框。</p></div>
+</div></div>
+</div></div>
+</div></div>
+</div>
+<script>
+/* 长行间公式自动缩放。
+   等 KaTeX 渲染完成后，对每条 .math-display 测一次自然宽度；
+   若超过容器宽度，就设一次 zoom 缩到放得下，再用 getBoundingClientRect
+   最多微调两次。整体只缩必要的量，不会过度缩小。
+
+   注意：不能用 scrollWidth 作为「缩放后是否仍然溢出」的判据 —— Chrome 里
+   zoom 不改变 scrollWidth，循环条件恒为真，会把 zoom 一轮轮乘下去，
+   越缩越小。必须用 getBoundingClientRect().width 反映缩放后的真实视觉宽度。
+*/
+(function () {
+  var MIN_ZOOM = 0.3;
+
+  function visualWidth(el) {
+    // getBoundingClientRect().width 会正确反映 zoom 之后的视觉宽度。
+    return el.getBoundingClientRect().width;
+  }
+
+  function fitMath() {
+    var els = document.querySelectorAll('.math-display');
+    for (var i = 0; i < els.length; i++) {
+      var el = els[i];
+      el.style.zoom = '';                 // 先复位，才能测到自然宽度
+      var avail = el.clientWidth;         // 容器内容宽（未缩放）
+      if (!avail) continue;
+      var natural = el.scrollWidth;       // zoom=1 时的自然内容宽度
+      if (!natural || natural <= avail + 1) continue;   // 放得下就别动
+
+      var zoom = Math.max(avail / natural, MIN_ZOOM);
+      el.style.zoom = zoom.toFixed(4);
+
+      // 最多微调 2 次，以真实视觉宽度为准。
+      for (var k = 0; k < 2; k++) {
+        var now = visualWidth(el);
+        if (now <= avail + 1) break;
+        zoom = Math.max(zoom * (avail / now), MIN_ZOOM);
+        el.style.zoom = zoom.toFixed(4);
+      }
+    }
+  }
+
+  var tries = 0;
+  var timer = setInterval(function () {
+    tries++;
+    // .katex-html 出现即说明 KaTeX 已经渲染出内容；最多轮询 3 秒。
+    if (document.querySelector('.katex-html') || tries >= 100) {
+      clearInterval(timer);
+      fitMath();
+      // 字体晚到的兜底：再跑一遍。
+      setTimeout(fitMath, 200);
+    }
+  }, 30);
+})();
+</script>
+</body>
+</html>
